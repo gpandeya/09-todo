@@ -1,0 +1,75 @@
+
+<h1>Task Manager</h1>
+
+<%= form_with(model: @task, local: true) do |form| %>
+    <div class="field">
+        <%= form.label :title %>
+        <%= form.text_field :title, id: :task_title %>
+    </div>
+    
+    <div class="field">
+        <%= form.label :is_complete %>
+        <%= form.check_box :is_complete, id: :task_is_complete %>
+    </div>
+    
+    <div class="field">
+        <%= form.label :priority %>
+        <%= form.number_field :priority, id: :task_priority %>
+    </div>
+    
+    <div class="field">
+        <%= form.label :category %>
+        <%= form.select( :category, id: :task_category) do %>
+            <% ['Work','Play', 'Home' ].each do |cat| %>
+                <%= content_tag(:option , cat, value: cat) %>
+            <% end %>
+        <% end %>
+    </div>
+    
+     <div class="field">
+        <%= form.label :due %>
+        <%= form.date_select :due, id: :task_due %>
+</div>
+    
+    
+    <div>
+        <%= form.submit %>
+    </div>
+
+<% end %>
+
+<table>
+    <thead>
+        <tr>
+            <th>Complete?</th>
+            <th>id</th>
+            <th>Title</th>
+            <th>Priority</th>
+            <th>Category</th>
+            <th>Due</th>
+        </tr>
+    </thead>
+    
+    <tbody>
+        <% @tasks.each do |t| %>
+           <tr>
+               <td>
+                    <%= link_to(t,method: :delete) do %>
+                       <img width ="20" height="20" src="/trash.png" />
+                    <% end %>
+               </td>
+               
+               <td><%= t.is_complete %></td>
+                <td><%= t.id %></td>
+                <td><%= t.title %></td>
+                <td><%= t.priority %></td>
+                <td><%= t.category %></td>
+                <td><%= t.due %></td>
+           </tr>
+        <% end %>
+     
+        
+    </tbody>
+
+
+</table>
