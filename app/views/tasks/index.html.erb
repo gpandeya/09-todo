@@ -21,7 +21,7 @@
         <%= form.label :category %>
         <%= form.select( :category, id: :task_category) do %>
             <% ['Work','Play', 'Home' ].each do |cat| %>
-                <%= content_tag(:option , cat, value: cat) %>
+                <%= content_tag(:option , cat, value: cat, selected: @task.category == cat) %>
             <% end %>
         <% end %>
     </div>
@@ -41,12 +41,14 @@
 <table>
     <thead>
         <tr>
+            <th></th>
             <th>Complete?</th>
             <th>id</th>
             <th>Title</th>
             <th>Priority</th>
             <th>Category</th>
             <th>Due</th>
+            <th></th>
         </tr>
     </thead>
     
@@ -65,6 +67,10 @@
                 <td><%= t.priority %></td>
                 <td><%= t.category %></td>
                 <td><%= t.due %></td>
+                <td> 
+                    <%= link_to('edit', edit_task_path(t), method: :get) %>
+                
+                </td>
            </tr>
         <% end %>
      
